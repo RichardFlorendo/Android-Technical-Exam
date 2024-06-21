@@ -1,18 +1,22 @@
 package com.example.android_technical_exam.api
 
-import com.example.android_technical_exam.model.PersonResponse
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.example.android_technical_exam.api.ServiceFactory.createRetrofitService
+import com.example.android_technical_exam.api.model.RandomUserResponse
+import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
+import retrofit2.http.Query
 
-private val retrofit = Retrofit.Builder().baseUrl("https://randomuser.me/") //baseURL
-    .addConverterFactory(GsonConverterFactory.create())
-    .build()
+interface PersonAPI {
+    @GET("api/")
+    fun getRandomUsers(@Query("results") results: Int): Observable<RandomUserResponse>
 
-val personservice = retrofit.create(PersonAPI::class.java)
+    object Factory {
+        val SERVICE_ENDPOINT: String = "https://randomuser.me/"
 
-interface PersonAPI{
-    @GET("api") //appended to the end of baseURL
-    suspend fun getCategories():PersonResponse //Adds to the Category.kt list
-
+        fun create(): PersonAPI {
+            return createRetrofitService(
+                PersonAPI::class.java, SERVICE_ENDPOINT
+            )
+        }
+    }
 }

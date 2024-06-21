@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("org.jetbrains.kotlin.plugin.parcelize")
+    alias(libs.plugins.org.jetbrains.kotlin.kapt)
 }
 
 android {
@@ -23,7 +24,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -39,6 +40,8 @@ android {
     }
     buildFeatures {
         compose = true
+        viewBinding = true
+        dataBinding = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -52,20 +55,18 @@ android {
 
 dependencies {
 
-//    val retrofitVersion = "2.9.0"
-//    val okhttpLoggingInterceptorVersion = "4.9.1"
-//    val gsonConverterVersion = "2.9.0"
-//
-//    val retrofit = "com.squareup.retrofit2:retrofit:${retrofitVersion}"
-//    val okhttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${okhttpLoggingInterceptorVersion}"
-//    val gsonConverter = "com.squareup.retrofit2:converter-gson:${gsonConverterVersion}"
-//
-//    // Retrofit
-//    implementation(retrofit)
-//    implementation(okhttpLoggingInterceptor)
-//    implementation(gsonConverter)
+    implementation(libs.picasso)
 
+    implementation(libs.rxjava)
+    implementation(libs.rxandroid)
+
+    implementation(libs.androidx.databinding.runtime)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.material)
+
+    implementation(libs.okhttp3)
     implementation(libs.retrofit2)
+    implementation(libs.retrofit2.adapter.rxjava)
     implementation(libs.retrofit2.gson)
 
     implementation(libs.androidx.core.ktx)
@@ -78,6 +79,8 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.databinding.runtime)
+    implementation(libs.androidx.appcompat)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

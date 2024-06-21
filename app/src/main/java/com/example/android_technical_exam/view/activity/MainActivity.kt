@@ -1,23 +1,28 @@
 package com.example.android_technical_exam.view.activity
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.ComponentActivity
-import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil
 import com.example.android_technical_exam.R
+import com.example.android_technical_exam.databinding.MainActivityBinding
+import com.example.android_technical_exam.view.fragment.PeopleFragment
 
 
-class MainActivity : ComponentActivity(), View.OnClickListener{
+class MainActivity : AppCompatActivity(){
+
+    lateinit var mMainActivityBinding: MainActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_screen_layout)
+        mMainActivityBinding = DataBindingUtil.setContentView(this, R.layout.main_activity)
+        setSupportActionBar(mMainActivityBinding.toolbar)
+        mMainActivityBinding.toolbar.setTitle("People")
 
-        enableEdgeToEdge()
-    }
-
-    override fun onClick(v: View?) {
-
+        getSupportFragmentManager().beginTransaction()
+            .replace(R.id.fragment_content, PeopleFragment())
+            .commit()
     }
 
 }
