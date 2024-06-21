@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("org.jetbrains.kotlin.plugin.parcelize")
 }
 
 android {
@@ -50,6 +51,22 @@ android {
 }
 
 dependencies {
+
+//    val retrofitVersion = "2.9.0"
+//    val okhttpLoggingInterceptorVersion = "4.9.1"
+//    val gsonConverterVersion = "2.9.0"
+//
+//    val retrofit = "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+//    val okhttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${okhttpLoggingInterceptorVersion}"
+//    val gsonConverter = "com.squareup.retrofit2:converter-gson:${gsonConverterVersion}"
+//
+//    // Retrofit
+//    implementation(retrofit)
+//    implementation(okhttpLoggingInterceptor)
+//    implementation(gsonConverter)
+
+    implementation(libs.retrofit2)
+    implementation(libs.retrofit2.gson)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
